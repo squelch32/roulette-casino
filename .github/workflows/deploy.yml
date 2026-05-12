@@ -1,0 +1,38 @@
+name: Deploy to Linode
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        env:
+          SSH_KEY: ${{ secrets.LINODE_SSH_KEY }}
+          LINODE_HOST: ${{ secrets.LINODE_HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "$LINODE_HOST" >> ~/.ssh/known_hosts
+
+      - name: Rsync site files to server
+        env:
+          LINODE_HOST: ${{ secrets.LINODE_HOST }}
+        run: |
+          rsync -avz --delete \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.gitignore' \
+            --exclude='AGENTS.md' \
+            --exclude='README.md' \
+            --exclude='scripts' \
+            --exclude='dev-server.mjs' \
+            -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
+            ./ "deploy@${LINODE_HOST}:/var/www/casino/"
