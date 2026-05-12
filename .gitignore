@@ -1,0 +1,14 @@
+# Cursor IDE workspace state
+.cursor/
+
+# Node tools (in case we add them later)
+node_modules/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor scratch
+*.log
+*.tmp
