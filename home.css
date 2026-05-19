@@ -1,0 +1,157 @@
+@font-face {
+  font-family: "Helvetica Neue Bold";
+  src:
+    url("roulette/fonts/HelveticaNeue-Bold.otf") format("opentype"),
+    local("Helvetica Neue Bold"),
+    local("HelveticaNeue-Bold");
+  font-style: normal;
+  font-weight: 700;
+  font-display: block;
+}
+
+:root {
+  --home-bg: #1a3300;
+  --home-title: #e6f54d;
+  --home-subtitle: #808080;
+  --card-live-bg: #000000;
+  --card-soon-bg: #333333;
+  --card-live-text: #ffffff;
+  --card-soon-text: #666666;
+  --soon-badge: #999999;
+  --soon-icon-opacity: 0.35;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Helvetica Neue Bold", "Helvetica Neue", Helvetica, sans-serif;
+  font-weight: 700;
+  color: var(--card-live-text);
+  background: var(--home-bg);
+}
+
+.home {
+  min-height: 100vh;
+  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.25rem, 4vw, 3rem) 2.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.home-header {
+  margin-bottom: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.home-header h1 {
+  margin: 0;
+  font-size: clamp(2.8rem, 9vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  color: var(--home-title);
+}
+
+.home-tagline {
+  margin: 0.5rem 0 0;
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+  color: var(--home-subtitle);
+  text-transform: lowercase;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.85rem, 2vw, 1.1rem);
+}
+
+@media (max-width: 720px) {
+  .game-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 420px) {
+  .game-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.game-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(150px, 22vw, 190px);
+  padding: 1rem 1rem 2.25rem;
+  border-radius: 14px;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.game-card--live {
+  background: var(--card-live-bg);
+  color: var(--card-live-text);
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.game-card--live:hover,
+.game-card--live:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  outline: none;
+}
+
+.game-card--soon {
+  background: var(--card-soon-bg);
+  color: var(--card-soon-text);
+  cursor: default;
+  pointer-events: none;
+}
+
+.game-name {
+  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+  text-transform: lowercase;
+  line-height: 1.2;
+}
+
+.game-art {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.35rem;
+  min-height: 5.5rem;
+}
+
+.game-icon {
+  display: block;
+  width: min(72%, 110px);
+  height: auto;
+  max-height: 100px;
+  object-fit: contain;
+}
+
+.game-card--live .game-icon {
+  width: min(76%, 120px);
+  max-height: 108px;
+}
+
+.game-card--soon .game-icon {
+  opacity: var(--soon-icon-opacity);
+}
+
+.coming-soon {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.65rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  color: var(--soon-badge);
+}

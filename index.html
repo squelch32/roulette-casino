@@ -3,144 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Casino · Roulette</title>
-    <link rel="icon" type="image/png" href="roulette%20favicon.png" />
-    <link rel="stylesheet" href="styles.css" />
+    <title>Casino · Home</title>
+    <link rel="icon" type="image/png" href="roulette/roulette%20favicon.png" />
+    <link rel="stylesheet" href="home.css" />
   </head>
   <body>
-    <header class="top">
-      <div class="brand">
+    <main class="home">
+      <header class="home-header">
         <h1>casino</h1>
-        <p class="tagline">roulette — completely free · no login required · ages 6 to 99</p>
-      </div>
-      <button type="button" class="btn ghost" id="btn-how" aria-haspopup="dialog">
-        how to play
-      </button>
-    </header>
+        <p class="home-tagline">welcome, choose a game from the 6 games below</p>
+      </header>
 
-    <main class="layout">
-      <section class="panel wheel-panel" aria-label="Wheel">
-        <div class="wheel-wrap">
-          <div class="wheel-pointer" aria-hidden="true"></div>
-          <div class="wheel" id="wheel" role="presentation"></div>
-        </div>
-        <output class="spin-result" id="last-result" for="spin">—</output>
-      </section>
+      <nav class="game-grid" aria-label="Choose a game">
+        <a class="game-card game-card--live" href="roulette/">
+          <span class="game-name">roulette</span>
+          <span class="game-art" aria-hidden="true">
+            <img class="game-icon" src="roulette%20icon.png" alt="" width="120" height="120" />
+          </span>
+        </a>
 
-      <section class="panel rail" aria-label="Bank">
-        <section class="summary-dashboard" aria-label="Roulette summary">
-          <div class="summary-box summary-win">
-            <span>win</span>
-            <strong id="summary-win">$0</strong>
-          </div>
-          <div class="summary-box summary-loss">
-            <span>loss</span>
-            <strong id="summary-loss">$0</strong>
-          </div>
-          <div class="summary-box summary-sum">
-            <span>sum</span>
-            <strong id="summary-sum">$0</strong>
-          </div>
-          <div class="summary-box summary-bet">
-            <span>bet</span>
-            <strong id="summary-bet">$0</strong>
-          </div>
-          <div class="summary-box summary-total">
-            <span>total earnings</span>
-            <strong id="summary-total">$0</strong>
-          </div>
-        </section>
+        <a class="game-card game-card--live" href="blackjack/">
+          <span class="game-name">blackjack</span>
+          <span class="game-art" aria-hidden="true">
+            <img class="game-icon" src="blackjack%20icon.png" alt="" width="120" height="100" />
+          </span>
+        </a>
 
-        <input id="bet-amount-input" type="hidden" value="10" />
-
-        <div class="summary-controls controls-panel">
-          <div class="option-picker roulette-type-picker" aria-label="Change roulette type">
-            <span>roulette type</span>
-            <button type="button" class="type-btn is-active" data-roulette-type="european" aria-pressed="true">EU</button>
-            <button type="button" class="type-btn" data-roulette-type="american" aria-pressed="false">US</button>
-          </div>
-          <div class="option-picker currency-picker" aria-label="Change currency symbol">
-            <span>currency</span>
-            <button type="button" class="currency-btn is-active" data-currency-symbol="$" aria-pressed="true">$</button>
-            <button type="button" class="currency-btn" data-currency-symbol="€" aria-pressed="false">€</button>
-            <button type="button" class="currency-btn" data-currency-symbol="£" aria-pressed="false">£</button>
-            <button type="button" class="currency-btn" data-currency-symbol="¥" aria-pressed="false">¥</button>
-            <button type="button" class="currency-btn" data-currency-symbol="₹" aria-pressed="false">₹</button>
-            <button type="button" class="currency-btn" data-currency-symbol="₩" aria-pressed="false">₩</button>
-          </div>
+        <div class="game-card game-card--soon" aria-disabled="true">
+          <span class="game-name">slots</span>
+          <span class="game-art" aria-hidden="true">
+            <img class="game-icon" src="slot%20machine%20icon.png" alt="" width="120" height="100" />
+          </span>
+          <span class="coming-soon">coming soon</span>
         </div>
 
-        <div class="chip-rack" id="chip-rack" aria-label="Chip values">
-          <!-- filled by JS -->
+        <div class="game-card game-card--soon" aria-disabled="true">
+          <span class="game-name">keno</span>
+          <span class="game-art" aria-hidden="true">
+            <img class="game-icon" src="keno%20icon.png" alt="" width="120" height="100" />
+          </span>
+          <span class="coming-soon">coming soon</span>
         </div>
 
-        <button type="button" class="summary-action-btn delete-bets-btn" id="btn-delete-bets">
-          <svg class="trash-icon" aria-hidden="true" viewBox="0 0 64 64" focusable="false">
-            <path d="M20 18h24v36H20V18Z" />
-            <path d="M14 14h36v6H14v-6Z" />
-            <path d="M25 8h14v6H25V8Z" />
-            <path d="M26 25h6v22h-6V25Z" />
-            <path d="M36 25h6v22h-6V25Z" />
-          </svg>
-          <span>delete all bets</span>
-        </button>
+        <div class="game-card game-card--soon" aria-disabled="true">
+          <span class="game-name">craps</span>
+          <span class="game-art" aria-hidden="true">
+            <img class="game-icon" src="craps%20icon.png" alt="" width="120" height="100" />
+          </span>
+          <span class="coming-soon">coming soon</span>
+        </div>
 
-        <button type="button" class="summary-action-btn restart-btn" id="btn-restart-session">
-          <svg class="restart-icon" aria-hidden="true" viewBox="0 0 64 64" focusable="false">
-            <path d="M52 14v18H34" />
-            <path d="M46 38A18 18 0 1 1 39 16" />
-          </svg>
-          <span>restart</span>
-        </button>
-      </section>
+        <div class="game-card game-card--soon" aria-disabled="true">
+          <span class="game-name">high-low</span>
+          <span class="game-art" aria-hidden="true">
+            <img class="game-icon" src="high-low%20icon.png" alt="" width="120" height="100" />
+          </span>
+          <span class="coming-soon">coming soon</span>
+        </div>
+      </nav>
     </main>
-
-    <section class="table-wrap" aria-label="Roulette table">
-      <div class="table-grid" id="table-grid"></div>
-
-      <div class="outside out-doz">
-        <button type="button" class="out-btn" data-bet-kind="dozen" data-arg="1">1st 12</button>
-        <button type="button" class="out-btn" data-bet-kind="dozen" data-arg="2">2nd 12</button>
-        <button type="button" class="out-btn" data-bet-kind="dozen" data-arg="3">3rd 12</button>
-      </div>
-      <div class="outside out-evenmoney">
-        <button type="button" class="out-btn" data-bet-kind="low">1–18</button>
-        <button type="button" class="out-btn even" data-bet-kind="even">Even</button>
-        <button type="button" class="out-btn red-patch" data-bet-kind="red">Red</button>
-        <button type="button" class="out-btn black-patch" data-bet-kind="black">Black</button>
-        <button type="button" class="out-btn odd" data-bet-kind="odd">Odd</button>
-        <button type="button" class="out-btn" data-bet-kind="high">19–36</button>
-      </div>
-
-    </section>
-
-    <div class="toolbar">
-      <button type="button" class="btn primary spin-big" id="btn-spin">spin wheel</button>
-    </div>
-
-    <dialog class="sheet" id="how-dialog">
-      <form method="dialog">
-        <h2>How to play</h2>
-        <ol>
-          <li>Tap a chip to choose the size of your next bet.</li>
-          <li>The summary shows this round's bet, win, loss, sum, and total earnings.</li>
-          <li>
-            Tap RED, BLACK, a number strip, EVEN, ODDS, 1–18, 19–36, or a dozen. Each tap
-            lays that stake.
-          </li>
-          <li>Spin. European wheel: single green zero.</li>
-        </ol>
-        <menu class="dialog-actions"><button type="submit" class="btn primary">Close</button></menu>
-      </form>
-    </dialog>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script>
-      if (typeof pdfjsLib !== "undefined") {
-        pdfjsLib.GlobalWorkerOptions.workerSrc =
-          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-      }
-    </script>
-    <script src="roulette.js" defer></script>
   </body>
 </html>

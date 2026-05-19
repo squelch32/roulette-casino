@@ -26,11 +26,25 @@ const server = http.createServer(async (req, res) => {
   try {
     let urlPath = decodeURIComponent(req.url.split("?")[0]);
     if (urlPath === "/") urlPath = "/index.html";
-    const filePath = path.normalize(path.join(ROOT, "." + urlPath));
+    else if (urlPath.endsWith("/")) urlPath += "index.html";
+    let filePath = path.normalize(path.join(ROOT, "." + urlPath));
     if (!filePath.startsWith(ROOT)) {
       res.writeHead(403);
       res.end();
       return;
+    }
+    try {
+      await fs.access(filePath);
+    } catch {
+      const asDir = path.join(filePath, "index.html");
+      if (asDir.startsWith(ROOT)) {
+        try {
+          await fs.access(asDir);
+          filePath = asDir;
+        } catch {
+          /* fall through to 404 */
+        }
+      }
     }
     const data = await fs.readFile(filePath);
     const ext = path.extname(filePath).toLowerCase();
@@ -46,5 +60,6 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, "127.0.0.1", () => {
   // eslint-disable-next-line no-console
-  console.log(`http://127.0.0.1:${PORT}/index.html`);
+  console.log(`http://127.0.0.1:${PORT}/`);
+  console.log(`  roulette: http://127.0.0.1:${PORT}/roulette/`);
 });

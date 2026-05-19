@@ -23,18 +23,16 @@ You don't need anything except [Node.js](https://nodejs.org/) installed.
    node dev-server.mjs
    ```
 
-3. Open the printed URL (defaults to `http://127.0.0.1:8787/index.html`).
+3. Open the printed URL (defaults to `http://127.0.0.1:8787/` — pick a game from the home screen).
 
 The server only exists so the browser can load the wheel PDF and font files over `http://` (browsers block local `file://` for that).
 
 ## Project files
 
-- `index.html` — the page structure
-- `styles.css` — the look (table, summary panel, chips, buttons)
-- `roulette.js` — game logic and UI behavior
+- `index.html` + `home.css` — casino home (pick a game)
+- `roulette/` — roulette game (`index.html`, `styles.css`, `roulette.js`, assets)
+- `blackjack/` — placeholder for the next game
 - `dev-server.mjs` — minimal Node static file server
-- `fonts/HelveticaNeue-Bold.otf` — wheel/page font
-- `roulette favicon.png` — browser tab icon
 - Design assets (`*.png`, `*.pdf`) — original references that the layout follows
 - `AGENTS.md` — guide for AI assistants helping with this project
 

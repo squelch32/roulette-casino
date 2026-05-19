@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Casino · Blackjack</title>
+    <link rel="icon" type="image/png" href="../roulette/roulette%20favicon.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <a class="home-link" href="../" aria-label="Back to casino home">← home</a>
+      <div class="brand">
+        <h1>casino</h1>
+        <p class="tagline">blackjack — completely free · no login required · ages 6 to 99</p>
+      </div>
+      <button type="button" class="btn ghost" id="btn-how" aria-haspopup="dialog">
+        how to play
+      </button>
+    </header>
+
+    <section id="bj-setup" class="bj-screen bj-screen--active" aria-label="Choose your bet">
+      <div class="bj-setup-layout">
+        <div class="bj-chips-column" aria-label="Chip values">
+          <div class="chip-rack" id="chip-rack"></div>
+        </div>
+
+        <aside class="bj-bank-column" aria-label="Bank">
+          <input id="bet-amount-input" type="hidden" value="10" />
+
+          <div class="option-picker currency-picker" aria-label="Change currency symbol">
+            <span>currency</span>
+            <button type="button" class="currency-btn is-active" data-currency-symbol="$" aria-pressed="true">$</button>
+            <button type="button" class="currency-btn" data-currency-symbol="€" aria-pressed="false">€</button>
+            <button type="button" class="currency-btn" data-currency-symbol="£" aria-pressed="false">£</button>
+            <button type="button" class="currency-btn" data-currency-symbol="¥" aria-pressed="false">¥</button>
+            <button type="button" class="currency-btn" data-currency-symbol="₹" aria-pressed="false">₹</button>
+            <button type="button" class="currency-btn" data-currency-symbol="₩" aria-pressed="false">₩</button>
+          </div>
+
+          <section class="summary-dashboard" aria-label="Session summary">
+            <div class="summary-box summary-win">
+              <span>win</span>
+              <strong id="summary-win">$0</strong>
+            </div>
+            <div class="summary-box summary-loss">
+              <span>loss</span>
+              <strong id="summary-loss">$0</strong>
+            </div>
+            <div class="summary-box summary-sum">
+              <span>sum</span>
+              <strong id="summary-sum">$0</strong>
+            </div>
+            <div class="summary-box summary-bet">
+              <span>bet</span>
+              <strong id="summary-bet">$0</strong>
+            </div>
+            <div class="summary-box summary-total">
+              <span>total earnings</span>
+              <strong id="summary-total">$0</strong>
+            </div>
+          </section>
+
+          <button type="button" class="summary-action-btn delete-bets-btn" id="btn-clear-bet">
+            <svg class="trash-icon" aria-hidden="true" viewBox="0 0 64 64" focusable="false">
+              <path d="M20 18h24v36H20V18Z" />
+              <path d="M14 14h36v6H14v-6Z" />
+              <path d="M25 8h14v6H25V8Z" />
+              <path d="M26 25h6v22h-6V25Z" />
+              <path d="M36 25h6v22h-6V25Z" />
+            </svg>
+            <span>delete all bets</span>
+          </button>
+
+          <button type="button" class="summary-action-btn restart-btn" id="btn-restart-session">
+            <svg class="restart-icon" aria-hidden="true" viewBox="0 0 64 64" focusable="false">
+              <path d="M52 14v18H34" />
+              <path d="M46 38A18 18 0 1 1 39 16" />
+            </svg>
+            <span>restart</span>
+          </button>
+
+          <button type="button" class="summary-action-btn place-bets-btn" id="btn-deal">
+            <svg class="check-icon" aria-hidden="true" viewBox="0 0 64 64" focusable="false">
+              <path d="M12 34 L28 50 L52 16" />
+            </svg>
+            <span>place bets</span>
+          </button>
+        </aside>
+      </div>
+    </section>
+
+    <section id="bj-play" class="bj-screen" hidden aria-label="Blackjack table">
+      <p class="bj-play-bar">
+        <button type="button" class="btn ghost bj-back-bank" id="btn-back-bank">← change bet</button>
+        <span class="bj-hand-stake" id="hand-stake-label"></span>
+      </p>
+
+      <div class="bj-table">
+        <main class="bj-felt" aria-label="Blackjack table">
+          <section class="bj-zone bj-zone--dealer" aria-label="Dealer hand">
+            <p class="bj-zone-label">dealer</p>
+            <div class="bj-hand" id="dealer-hand"></div>
+            <output class="bj-total" id="dealer-total" aria-live="polite"></output>
+          </section>
+
+          <section class="bj-zone bj-zone--player" aria-label="Your hand">
+            <p class="bj-zone-label">you</p>
+            <div class="bj-hand" id="player-hand"></div>
+            <output class="bj-total" id="player-total" aria-live="polite"></output>
+          </section>
+
+          <p class="bj-status" id="bj-status" aria-live="polite"></p>
+        </main>
+
+        <aside class="bj-actions" aria-label="Your actions">
+          <button type="button" class="bj-action" id="btn-hit" disabled>
+            <span class="bj-action-icon-wrap">
+              <img class="bj-action-icon" src="hit%20icon.png" width="177" height="208" alt="" />
+            </span>
+            <img class="bj-action-label" src="hit%20button.png" width="1289" height="238" alt="hit" />
+          </button>
+
+          <button type="button" class="bj-action" id="btn-stand" disabled>
+            <span class="bj-action-icon-wrap">
+              <img class="bj-action-icon" src="stand%20icon.png" width="138" height="187" alt="" />
+            </span>
+            <img class="bj-action-label" src="stand%20button.png" width="1289" height="238" alt="stand" />
+          </button>
+        </aside>
+      </div>
+    </section>
+
+    <dialog class="sheet" id="how-dialog">
+      <form method="dialog">
+        <h2>How to play</h2>
+        <ol>
+          <li>Tap chips on the left to add to your bet.</li>
+          <li>Tap <strong>place bets</strong> to go to the table.</li>
+          <li>Get closer to 21 than the dealer without going over.</li>
+          <li><strong>Hit</strong> takes another card. <strong>Stand</strong> ends your turn.</li>
+        </ol>
+        <menu class="dialog-actions"><button type="submit" class="btn primary">Close</button></menu>
+      </form>
+    </dialog>
+
+    <script src="blackjack.js" defer></script>
+  </body>
+</html>
+
