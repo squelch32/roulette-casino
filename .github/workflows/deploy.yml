@@ -34,5 +34,7 @@ jobs:
             --exclude='README.md' \
             --exclude='scripts' \
             --exclude='dev-server.mjs' \
+            --exclude='slots/*.ps1' \
+            --exclude='slots/slot machine *.png' \
             -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
             ./ "deploy@${LINODE_HOST}:/var/www/casino/"

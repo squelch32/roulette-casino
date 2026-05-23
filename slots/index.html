@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Casino · Slots</title>
+    <link rel="icon" type="image/png" href="../roulette/roulette%20favicon.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <a class="home-link" href="../" aria-label="Back to casino home">← home</a>
+      <div class="brand">
+        <h1>casino</h1>
+        <p class="tagline">slots — completely free · no login required · ages 6 to 99</p>
+      </div>
+      <button type="button" class="btn-customize" id="btn-customize" aria-haspopup="dialog">
+        customize
+      </button>
+    </header>
+
+    <main class="slots-main">
+      <p class="slots-hint" id="slots-hint">
+        Pull the lever to spin. Only the middle row counts for payouts.
+      </p>
+
+      <div class="machine-wrap">
+        <div class="machine" id="machine" aria-label="Slot machine">
+          <div class="machine-cabinet" id="machine-cabinet">
+            <div class="machine-marquee" aria-hidden="true">casino</div>
+
+            <!-- Dark frame: a "hole" cut into the cabinet where reels show through -->
+            <div class="reels-frame">
+              <div class="reels-window" id="reels-window" aria-hidden="true">
+                <div class="reel" data-reel="0">
+                  <div class="reel-strip"></div>
+                </div>
+                <div class="reel" data-reel="1">
+                  <div class="reel-strip"></div>
+                </div>
+                <div class="reel" data-reel="2">
+                  <div class="reel-strip"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bet-panel" aria-label="Bet amount">
+              <button type="button" class="bet-btn bet-btn--down" id="bet-down" aria-label="Decrease bet">
+                −
+              </button>
+              <div class="bet-readout">
+                <span class="bet-label">bet</span>
+                <output class="bet-value" id="bet-value" for="bet-down bet-up">$1</output>
+              </div>
+              <button type="button" class="bet-btn bet-btn--up" id="bet-up" aria-label="Increase bet">
+                +
+              </button>
+            </div>
+
+            <!-- Lever sticks out to the right of the cabinet -->
+            <div class="lever-wrap" id="lever-wrap">
+              <button
+                type="button"
+                class="lever-hit"
+                id="lever"
+                aria-label="Pull lever to spin"
+              >
+                <span class="lever-stick" aria-hidden="true"></span>
+                <span class="lever-ball" aria-hidden="true"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="slots-status" id="slots-status" role="status" aria-live="polite"></p>
+    </main>
+
+    <dialog class="customize-sheet" id="customize-dialog" aria-labelledby="customize-title">
+      <header class="customize-head">
+        <h2 id="customize-title">customize slots</h2>
+        <button type="button" class="customize-close" id="customize-close" aria-label="Close customize panel">
+          ×
+        </button>
+      </header>
+
+      <section class="customize-section" aria-labelledby="payouts-section-title">
+        <h3 id="payouts-section-title">payouts</h3>
+        <p class="customize-note">tap a row to edit. money ×2 … ×50 stay fixed (board-game signal only).</p>
+        <ul class="payout-list" id="payout-list"></ul>
+      </section>
+
+      <section class="customize-section" aria-labelledby="colors-section-title">
+        <h3 id="colors-section-title">machine color</h3>
+        <p class="customize-note">pick any color. add more for a gradient.</p>
+        <div class="color-tools">
+          <input type="color" id="color-picker" value="#ffde00" aria-label="Pick a color" />
+          <button type="button" class="btn-small" id="color-add">add color</button>
+        </div>
+        <ul class="color-list" id="color-list"></ul>
+        <div class="color-preview" id="color-preview" aria-hidden="true"></div>
+      </section>
+
+      <section class="customize-section" aria-labelledby="symbols-section-title">
+        <h3 id="symbols-section-title">symbols on reels</h3>
+        <p class="customize-note">turn symbols off so they never land on a spin.</p>
+        <ul class="symbol-list" id="symbol-list"></ul>
+      </section>
+
+      <footer class="customize-foot">
+        <button type="button" class="btn-small btn-muted" id="reset-settings">reset to defaults</button>
+        <button type="button" class="btn-small btn-primary" id="customize-done">done</button>
+      </footer>
+    </dialog>
+
+    <dialog class="payout-editor" id="payout-editor" aria-labelledby="payout-editor-title">
+      <h2 id="payout-editor-title">payout of this combination</h2>
+      <p class="payout-editor-label" id="payout-editor-combo"></p>
+
+      <div class="payout-amount-wrap">
+        <span class="payout-amount-prefix" id="payout-amount-prefix">$</span>
+        <input
+          type="number"
+          class="payout-amount-input"
+          id="payout-amount-input"
+          min="0"
+          step="1"
+          inputmode="numeric"
+        />
+      </div>
+
+      <div class="payout-type-row">
+        <span class="payout-type-label">type</span>
+        <div class="payout-type-buttons" role="group" aria-label="Payout type">
+          <button type="button" class="type-btn is-active" data-type="money">money</button>
+          <button type="button" class="type-btn" data-type="times">times bet</button>
+          <button type="button" class="type-btn" data-type="take">take away</button>
+        </div>
+      </div>
+
+      <div class="payout-editor-actions">
+        <button type="button" class="editor-btn editor-btn--cancel" id="payout-cancel">
+          <span aria-hidden="true">×</span> cancel
+        </button>
+        <button type="button" class="editor-btn editor-btn--save" id="payout-save">
+          <span aria-hidden="true">✓</span> change
+        </button>
+      </div>
+    </dialog>
+
+    <script type="module" src="slots.js"></script>
+  </body>
+</html>

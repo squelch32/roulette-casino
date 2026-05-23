@@ -414,7 +414,10 @@ function isBust(cards) {
 }
 
 function formatHandTotal(cards, prefix = "total") {
-  if (isBust(cards)) return "total: bust";
+  if (isBust(cards)) {
+    const { total } = handTotals(cards);
+    return `total: bust (${total})`;
+  }
   const { total, soft } = handTotals(cards);
   if (prefix === "showing") return `showing: ${total}`;
   return `total: ${total}${soft ? " (soft)" : ""}`;
